@@ -18,6 +18,7 @@ function App() {
 	useEffect(() => {
 		const getAllTodos = async () => {
 			const todoData = await GetAllTodos();
+			console.log(todoData);
 			setTodos(todoData);
 			setIsLoading(false);
 		};
