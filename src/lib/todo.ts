@@ -1,4 +1,5 @@
-﻿import { supabase } from "../utils/supabase";
+﻿import { Todo } from "../domain/todo";
+import { supabase } from "../utils/supabase";
 
 export async function GetAllTodos() {
 	const response = await supabase.from("todos").select("*");
@@ -6,5 +7,10 @@ export async function GetAllTodos() {
 	if (response.error) {
 		throw new Error(response.error.message);
 	}
-	console.log(response.data);
+
+	const todoData = response.data.map((todo) => {
+		return Todo.newTodo(todo.id, todo.title, todo.done, todo.created_at);
+	});
+
+	return todoData;
 }
