@@ -1,24 +1,19 @@
-import { useState } from "react";
-import "./App.css";
+import { Button } from "@chakra-ui/react";
+import { useEffect } from "react";
+import { GetAllTodos } from "./lib/todo";
 
 function App() {
-	const [count, setCount] = useState(0);
+	useEffect(() => {
+		const getAllTodos = async () => {
+			const todoData = await GetAllTodos();
+			console.log(todoData);
+		};
+		getAllTodos();
+	}, []);
 
 	return (
 		<>
-			<div></div>
-			<h1>Vite + React</h1>
-			<div className="card">
-				<button onClick={() => setCount((count) => count + 1)}>
-					count is {count}
-				</button>
-				<p>
-					Edit <code>src/App.tsx</code> and save to test HMR
-				</p>
-			</div>
-			<p className="read-the-docs">
-				Click on the Vite and React logos to learn more
-			</p>
+			<Button colorScheme="teal">button</Button>
 		</>
 	);
 }
